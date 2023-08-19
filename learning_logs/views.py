@@ -79,3 +79,20 @@ def edit_entry(request, entry_id):
 
     context = {"entry": entry, "topic": topic, "form": form}
     return render(request, "learning_logs/edit_entry.html", context)
+
+
+def delete_entry(request, entry_id):
+    """Delete an entry"""
+    # Retrieve entry to be deleted
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method == "POST":
+        # Check if the request method is a POST (confirming deletion)
+        entry.delete()
+        # Delete the entry and redirect to the topic's detail page
+        return redirect("learning_logs:topic", topic_id=topic.id)
+
+    # If request method is not POST, prepare context for rendering the confirmation page
+    context = {"entry": entry, "topic": topic}
+    return render(request, "learning_logs/delete_entry.html", context)
