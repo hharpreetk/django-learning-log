@@ -41,6 +41,23 @@ def new_topic(request):
     return render(request, "learning_logs/new_topic.html", context)
 
 
+def edit_topic(request, topic_id):
+    """Edit an existing topic"""
+    topic = Topic.objects.get(id=topic_id)
+    if request.method != "POST":
+        # Initial request, prefill form with the current topic
+        form = TopicForm(instance=topic)
+    else:
+        # POST data submitted, process data
+        form = TopicForm(instance=topic, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("learning_logs:topics")
+
+    context = {"topic": topic, "form": form}
+    return render(request, "learning_logs/edit_topic.html", context)
+
+
 def new_entry(request, topic_id):
     """Add a new entry for particular topic"""
     topic = Topic.objects.get(id=topic_id)
