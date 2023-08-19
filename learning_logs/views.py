@@ -58,6 +58,19 @@ def edit_topic(request, topic_id):
     return render(request, "learning_logs/edit_topic.html", context)
 
 
+def delete_topic(request, topic_id):
+    """Delete a topic and its associated entries."""
+    topic = Topic.objects.get(id=topic_id)
+
+    if request.method == "POST":
+        # Delete the topic and its entries
+        topic.delete()
+        return redirect("learning_logs:topics")
+
+    context = {"topic": topic}
+    return render(request, "learning_logs/delete_topic.html", context)
+
+
 def new_entry(request, topic_id):
     """Add a new entry for particular topic"""
     topic = Topic.objects.get(id=topic_id)

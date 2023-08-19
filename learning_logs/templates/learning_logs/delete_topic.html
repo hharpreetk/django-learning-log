@@ -1,0 +1,14 @@
+{% extends "learning_logs/base.html" %} {% block content %}
+<p>
+  <strong>Warning:</strong> Deleting this topic will also delete all the
+  associated entries.
+</p>
+<p>Are you sure you want to delete the topic "{{ topic }}"?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Delete Topic</button>
+</form>
+
+<a href="{% url 'learning_logs:topics' %}">Cancel</a>
+{% endblock %}
