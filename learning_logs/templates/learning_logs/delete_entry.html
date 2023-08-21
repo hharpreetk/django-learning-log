@@ -1,13 +1,25 @@
 {% extends 'learning_logs/base_card.html' %}
 {% load django_bootstrap5 %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="{% url 'learning_logs:index' %}">Home</a>
+    <li class="breadcrumb-item">
+      <a href="{% url 'learning_logs:topics' %}">Topics</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Delete Entry</li>
+  </li>
+{% endblock breadcrumb %}
 {% block card_header %}
   <h2 class="h5 mb-0">Delete Entry</h2>
 {% endblock card_header %}
 {% block card_content %}
   <p class="mb-2">Are you sure you want to delete the following entry?</p>
-  <div class="p-3 mb-3 bg-light border-start border-4">
+  <div class="p-3 pb-1 mb-3 bg-light border-start border-4">
     <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-    <p>{{ entry.text|linebreaks }}</p>
+    {{ entry.text|linebreaks }}
   </div>
   <form method="post">
     {% csrf_token %}

@@ -1,4 +1,10 @@
 {% extends 'learning_logs/base_card.html' %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="{% url 'learning_logs:index' %}">Home</a>
+    <li class="breadcrumb-item active" aria-current="page">Topics</li>
+  </li>
+{% endblock breadcrumb %}
 {% block card_header %}
   <h2 class="h5 my-1">Topics ({{ topics.count }})</h2>
   <a class="btn btn-success" href="{% url 'learning_logs:new_topic' %}">Add a New Topic</a>

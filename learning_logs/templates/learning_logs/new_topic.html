@@ -1,5 +1,14 @@
 {% extends 'learning_logs/base_card.html' %}
 {% load django_bootstrap5 %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'learning_logs:index' %}">Home</a>
+        <li class="breadcrumb-item">
+            <a href="{% url 'learning_logs:topics' %}">Topics</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">New Topic</li>
+    </li>
+{% endblock breadcrumb %}
 {% block card_header %}
     <h2 class="h5 my-1">Add New Topic</h2>
 {% endblock card_header %}

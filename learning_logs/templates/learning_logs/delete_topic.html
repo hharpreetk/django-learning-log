@@ -1,10 +1,17 @@
 {% extends 'learning_logs/base_card.html' %}
 {% load django_bootstrap5 %}
-
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="{% url 'learning_logs:index' %}">Home</a>
+    <li class="breadcrumb-item">
+      <a href="{% url 'learning_logs:topics' %}">Topics</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Delete Topic</li>
+  </li>
+{% endblock breadcrumb %}
 {% block card_header %}
   <h2 class="h5 mb-0">Delete Topic</h2>
 {% endblock card_header %}
-
 {% block card_content %}
   <div class="alert alert-warning">
     <strong>Warning:</strong> Deleting this topic will also delete all the associated entries.

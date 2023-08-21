@@ -50,6 +50,12 @@
       </div>
     </nav>
     <main class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% block breadcrumb %}
+          {% endblock breadcrumb %}
+        </ol>
+      </nav>
       {% block content %}
       {% endblock content %}
     </main>
