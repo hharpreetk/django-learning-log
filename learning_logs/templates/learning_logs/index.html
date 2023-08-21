@@ -1,11 +1,11 @@
 {% extends 'learning_logs/base.html' %}
 {% block content %}
   <div class="p-3 mb-4 bg-light border rounded-3">
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-2 py-md-4">
       {% if user.is_authenticated %}
-        <h1 class="display-3">Welcome {{ user.username }}.</h1>
+        <h1 class="display-4">Welcome {{ user.username }}.</h1>
       {% else %}
-        <h1 class="display-3">Track your Learning</h1>
+        <h1 class="display-4">Track your Learning</h1>
       {% endif %}
       <p class="lead">
         Make your own Learning Log, and keep a list of the
