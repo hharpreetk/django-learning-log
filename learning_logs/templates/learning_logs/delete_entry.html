@@ -1,16 +1,17 @@
-{% extends 'learning_logs/base.html' %} 
-
-{% block content %}
-<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-
-<p>Are you sure you want to delete the following entry?</p>
-
-<p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-<p>{{ entry.text|linebreaks }}</p>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit">Delete Entry</button>
-</form>
-
-<a href="{% url 'learning_logs:topic' topic.id %}">Cancel</a>
-{% endblock content %}
+{% extends 'learning_logs/base_card.html' %}
+{% load django_bootstrap5 %}
+{% block card_header %}
+  <h2 class="h5 mb-0">Delete Entry</h2>
+{% endblock card_header %}
+{% block card_content %}
+  <p class="mb-2">Are you sure you want to delete the following entry?</p>
+  <div class="p-3 mb-3 bg-light border-start border-4">
+    <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+    <p>{{ entry.text|linebreaks }}</p>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger me-2">Delete Entry</button>
+    <a href="{% url 'learning_logs:topics' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock card_content %}

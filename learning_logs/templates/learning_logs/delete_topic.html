@@ -1,14 +1,18 @@
-{% extends "learning_logs/base.html" %} {% block content %}
-<p>
-  <strong>Warning:</strong> Deleting this topic will also delete all the
-  associated entries.
-</p>
-<p>Are you sure you want to delete the topic "{{ topic }}"?</p>
+{% extends 'learning_logs/base_card.html' %}
+{% load django_bootstrap5 %}
 
-<form method="post">
-  {% csrf_token %}
-  <button type="submit">Delete Topic</button>
-</form>
+{% block card_header %}
+  <h2 class="h5 mb-0">Delete Topic</h2>
+{% endblock card_header %}
 
-<a href="{% url 'learning_logs:topics' %}">Cancel</a>
-{% endblock %}
+{% block card_content %}
+  <div class="alert alert-warning">
+    <strong>Warning:</strong> Deleting this topic will also delete all the associated entries.
+  </div>
+  <p class="mb-4">Are you sure you want to delete the topic "{{ topic }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger me-2">Delete Topic</button>
+    <a href="{% url 'learning_logs:topics' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock card_content %}

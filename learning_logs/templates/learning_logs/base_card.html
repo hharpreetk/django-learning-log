@@ -1,0 +1,15 @@
+{% extends "learning_logs/base.html" %}
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-header bg-light d-flex gap-2 flex-wrap justify-content-between align-items-center">
+            {% block card_header %}
+            {% endblock card_header %}
+        </div>
+        <div class="card-body">
+            <div class="list-group">
+                {% block card_content %}
+                {% endblock card_content %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

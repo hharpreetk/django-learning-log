@@ -1,20 +1,57 @@
-<p>
-  <a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
-  <a href="{% url 'learning_logs:topics' %}">Topics</a> -
-  {% if user.is_authenticated %}
-    Hello {{ user.username }}.
-  {% else %}
-    <a href="{% url 'accounts:register' %}">Register</a> - 
-    <a href="{% url 'accounts:login' %}">Log In</a>
-  {% endif %}
-</p>
-
-{% block content %}{% endblock content %}
-
-{% if user.is_authenticated %}
-  <hr />
-  <form action="{% url 'accounts:logout' %}" method="post">
-    {% csrf_token %}
-    <button name="submit">Log Out</button>
-  </form>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learning Log</title>
+    {% load static %}
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+            </li>
+          </ul>
+          <!-- End of links on left side of navbar -->
+          <ul class="navbar-nav ms-auto align-items-md-center">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}">Log In</a>
+              </li>
+            {% endif %}
+          </ul>
+          <!-- End of account-related links -->
+        </div>
+        <!-- Closes collapsible parts of navbar -->
+      </div>
+    </nav>
+    <main class="container">
+      {% block content %}
+      {% endblock content %}
+    </main>
+  </body>
+</html>

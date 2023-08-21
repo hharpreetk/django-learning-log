@@ -1,14 +1,14 @@
-{% extends "learning_logs/base.html" %} 
-
-{% block content %}
-
-<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-
-<p>Add a new entry:</p>
-
-<form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
-  {% csrf_token %} {{ form.as_div }}
-  <button name="submit">Add entry</button>
-</form>
-
-{% endblock content %}
+{% extends 'learning_logs/base_card.html' %}
+{% load django_bootstrap5 %}
+{% block card_header %}
+  <h2 class="h4 mb-0 text-break">Add New Entry for "{{ topic }}"</h2>
+{% endblock card_header %}
+{% block card_content %}
+  <form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_field form.text placeholder="Enter entry here" %}
+    <button type="submit" class="btn btn-success">Add entry</button>
+    <a href="{% url 'learning_logs:topic' topic.id %}"
+       class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock card_content %}

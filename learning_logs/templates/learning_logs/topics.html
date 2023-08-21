@@ -1,25 +1,26 @@
-{% extends 'learning_logs/base.html' %} {% block content %}
-
-<p>Topics: {{ topics.count }}</p>
-
-<ul>
+{% extends 'learning_logs/base_card.html' %}
+{% block card_header %}
+  <h2 class="h5 my-1">Topics ({{ topics.count }})</h2>
+  <a class="btn btn-success" href="{% url 'learning_logs:new_topic' %}">Add a New Topic</a>
+{% endblock card_header %}
+{% block card_content %}
   {% for topic in topics %}
-  <li>
-    <p>
-      <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
-    </p>
-    <p>Entries: {{ topic.entry_set.count }}</p>
-    <p>
-      <a href="{% url 'learning_logs:edit_topic' topic.id %}">Edit Topic</a> -
-      <a href="{% url 'learning_logs:delete_topic' topic.id %}">Delete Topic</a>
-    </p>
-  </li>
-
+    <div class="list-group-item">
+      <div class="d-flex gap-2 flex-wrap justify-content-between align-items-center">
+        <div>
+          <a class="text-break" href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }} ({{ topic.entry_set.count }})</a>
+        </div>
+        <div>
+          <a href="{% url 'learning_logs:edit_topic' topic.id %}"
+             class="btn btn-outline-primary btn-sm me-2">Edit Topic</a>
+          <a href="{% url 'learning_logs:delete_topic' topic.id %}"
+             class="btn btn-outline-danger btn-sm">Delete Topic</a>
+        </div>
+      </div>
+    </div>
   {% empty %}
-  <li>No topics have been added yet.</li>
+    <div class="list-group-item">
+      <p class="mb-0 text-center">No topics have been added yet.</p>
+    </div>
   {% endfor %}
-</ul>
-
-<a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
-
-{% endblock content %}
+{% endblock card_content %}

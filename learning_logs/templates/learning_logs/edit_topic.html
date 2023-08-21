@@ -1,11 +1,13 @@
-{% extends 'learning_logs/base.html' %} 
-
-{% block content %}
-<p>Edit topic:</p>
-
-<form action="{% url 'learning_logs:edit_topic' topic.id %}" method="post">
-  {% csrf_token %} 
-  {{ form.as_div }}
-  <button name="submit">Edit topic</button>
-</form>
-{% endblock content %}
+{% extends 'learning_logs/base_card.html' %}
+{% load django_bootstrap5 %}
+{% block card_header %}
+  <h2 class="h5 my-1">Edit Topic</h2>
+{% endblock card_header %}
+{% block card_content %}
+  <form action="{% url 'learning_logs:edit_topic' topic.id %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_field form.text placeholder="Enter topic here" %}
+    <button type="submit" class="btn btn-primary">Edit topic</button>
+    <a href="{% url 'learning_logs:topics' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock card_content %}
