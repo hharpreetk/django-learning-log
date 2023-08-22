@@ -1,3 +1,4 @@
+/* Apply the custom font to elements */
 body {
-  font-family: cursive, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
