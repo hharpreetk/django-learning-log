@@ -2,10 +2,6 @@
 
 Learning Log is a web application that allows users to create and manage their learning topics and associated entries. Users can organize their thoughts, notes, and progress on various subjects, making it a handy tool for tracking personal learning journeys.
 
-## Preview
-
-
-
 ## Features
 
 - Create and manage learning topics.
